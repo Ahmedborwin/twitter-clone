@@ -1,10 +1,9 @@
 import { useSession } from "next-auth/react";
 import prisma from "lib/prisma";
 import { useRouter } from "next/router";
+
 import NewTweet from "../components/NewTweets";
-
 import Tweets from "/components/Tweets";
-
 import { getTweets } from "lib/data.js";
 
 export default function Home({ tweets }) {

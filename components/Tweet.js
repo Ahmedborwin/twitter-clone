@@ -37,9 +37,11 @@ export default function Tweet({ tweet }) {
         </div>
       </div>
       <div className="pl-16 -mt-6">
-        <p className="flex-shrink pl-1 pr-2 text-base font-normal color-primary width-auto">
-          {tweet.content}
-        </p>
+        <Link href={`/${tweet.author.name}/status/${tweet.id}`}>
+          <p className="flex-shrink pl-1 pr-2 text-base font-normal color-primary width-auto">
+            {tweet.content}
+          </p>
+        </Link>
       </div>
     </div>
   );
