@@ -1,0 +1,6 @@
+generate random users + tweets has an issue and work irreglurly
+
+deleting a tweet and refreshign does not send you to the home page on first try
+
+my created users tweets are not displaying correctly.. i think it has something to do with lack of avator
+

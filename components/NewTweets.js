@@ -29,7 +29,7 @@ export default function NewTweet() {
       // methodc
       method: "POST",
     });
-    router.reload(window.location.pathanme);
+    router.reload(window.location.pathname);
   };
 
   return (

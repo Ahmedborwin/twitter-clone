@@ -2,6 +2,7 @@ import Tweet from "components/Tweet";
 
 export default function Tweets({ tweets }) {
   if (!tweets) return null;
+  //console.log(tweets);
 
   return (
     <>

@@ -3,6 +3,7 @@ import timeago from "/lib/timeago";
 import Image from "next/image";
 
 export default function Tweet({ tweet }) {
+  if (!tweet) return;
   return (
     <div className="mb-4">
       <div className="flex flex-shrink-0 p-4 pb-0">

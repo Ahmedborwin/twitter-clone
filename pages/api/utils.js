@@ -58,5 +58,13 @@ export default async function handler(req, res) {
       },
     });
   }
+  if (req.body.task === "delete tweet") {
+    //submit delete method to tweet table using the tweet ID
+    let id = req.body.tweetId;
+    await prisma.tweet.delete({
+      where: { id },
+    });
+  }
+
   res.end();
 }
