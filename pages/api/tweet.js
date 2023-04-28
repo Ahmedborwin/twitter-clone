@@ -12,26 +12,15 @@ export default async function handler(req, res) {
   });
 
   if (req.method === "POST") {
-    if (req.body.task === "reply tweet") {
-      await prisma.tweet.create({
-        data: {
-          content: req.body.content,
-          parent: req.body.parent,
-          author: {
-            connect: { id: user.id },
-          },
+    await prisma.tweet.create({
+      data: {
+        content: req.body.content,
+        parent: req.body.parent || null,
+        author: {
+          connect: { id: user.id },
         },
-      });
-    } else {
-      await prisma.tweet.create({
-        data: {
-          content: req.body.content,
-          author: {
-            connect: { id: user.id },
-          },
-        },
-      });
-    }
+      },
+    });
   }
 
   if (req.method === "DELETE") {

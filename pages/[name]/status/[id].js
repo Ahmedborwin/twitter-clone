@@ -1,22 +1,26 @@
 import Tweet from "components/Tweet";
-import { getTweet } from "lib/data.js";
+import { getTweet, getTweetReplies } from "lib/data.js";
 import prisma from "lib/prisma";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import TweetReply from "@/components/TweetReply";
-import { getTweetReplies } from "@/lib/data";
 import Tweets from "@/components/Tweets";
+import { useState } from "react";
+import LoadMoreReplies from "@/components/LoadMoreReplies";
 
-export default function SingleTweet({ tweet, tweetreplies }) {
+export default function SingleTweet({ tweet, initialTweetReplies }) {
   //declare variables
 
   const { data: session } = useSession();
+
+  const [tweetReplies, setTweetReplies] = useState(initialTweetReplies);
 
   const router = useRouter();
 
   if (typeof window !== "undefined" && !tweet) {
     return router.push("/");
   }
+
   const deleteTweet = async () => {
     await fetch("/api/utils", {
       body: JSON.stringify({
@@ -40,8 +44,15 @@ export default function SingleTweet({ tweet, tweetreplies }) {
       )}
       <div className="mt-10 border text-center">
         <div className="m-5">
-          <TweetReply parentId={parseInt(tweet.id)} tweets={tweetreplies} />
-          {!tweetreplies && <Tweets tweets={tweetreplies} />}
+          <TweetReply tweet={tweet} />
+          {<Tweets tweets={initialTweetReplies} noLink={true} />}
+          {
+            <LoadMoreReplies
+              tweets={tweetReplies}
+              setTweets={setTweetReplies}
+              parent={tweet.id}
+            />
+          }
         </div>
       </div>
     </>
@@ -52,7 +63,7 @@ export async function getServerSideProps({ params }) {
   let tweet = await getTweet(params.id, prisma);
   tweet = JSON.parse(JSON.stringify(tweet));
 
-  let tweetreplies = await getTweetReplies(params.id, prisma);
+  let tweetreplies = await getTweetReplies(params.id, prisma, 3);
   tweetreplies = JSON.parse(JSON.stringify(tweetreplies));
 
   //console.log(tweetreplies);
@@ -60,7 +71,7 @@ export async function getServerSideProps({ params }) {
   return {
     props: {
       tweet,
-      tweetreplies,
+      initialTweetReplies: tweetreplies,
     },
   };
 }

@@ -1,0 +1,17 @@
+generate random users + tweets has an issue and work irreglurly
+
+deleting a tweet and refreshign does not send you to the home page on first try
+
+my users tweets are not displaying correctly..
+i think it has something to do with lack of avator
+
+load more for tweet replies is not working. I cannot get api/tweets to look at the correct table read function based on if statement - it just skips both and i end up with an empty array
+
+
+||||||||||||||||||||||||||||||
+------------------------------
+
+things to do 
+
+add display more button to tweet replies
+Only display load more button aslong as there are more tweets to display 

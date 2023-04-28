@@ -2,7 +2,7 @@ import Link from "next/link";
 import timeago from "/lib/timeago";
 import Image from "next/image";
 
-export default function Tweet({ tweet }) {
+export default function Tweet({ tweet, noLink }) {
   if (!tweet) return;
   return (
     <div className="mb-4">
@@ -38,11 +38,17 @@ export default function Tweet({ tweet }) {
         </div>
       </div>
       <div className="pl-16 -mt-6">
-        <Link href={`/${tweet.author.name}/status/${tweet.id}`}>
+        {noLink ? (
           <p className="flex-shrink pl-1 pr-2 text-base font-normal color-primary width-auto">
             {tweet.content}
           </p>
-        </Link>
+        ) : (
+          <Link href={`/${tweet.author.name}/status/${tweet.id}`}>
+            <p className="flex-shrink pl-1 pr-2 text-base font-normal color-primary width-auto">
+              {tweet.content}
+            </p>
+          </Link>
+        )}
       </div>
     </div>
   );
